@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom'
 
 export const HeaderContainer = styled.div`
     width: 100%;
@@ -17,18 +18,15 @@ export const HeaderContent = styled.div`
     margin: auto;
 `;
 
-export const Logo = styled.span`
+export const Logo = styled(Link)`
     font-weight: bold;
+    text-decoration: none;
+    color: inherit;
     font-size: 1.6rem;
     text-transform: uppercase;
     letter-spacing: 3px;
     font-family: "Montserrat", sans-serif;
     transition: all 300ms;
-
-    :hover {
-        cursor: pointer;
-        color: #0092ca;
-    }
 `;
 
 export const NavItems = styled.ul`
@@ -38,7 +36,9 @@ export const NavItems = styled.ul`
     text-transform: uppercase;
 `;
 
-export const NavItem = styled.li`
+export const NavItem = styled(Link)`
+    text-decoration: none;
+    color: inherit;
     padding: 0 20px;
     transition: color 300ms;
 

@@ -12,7 +12,7 @@ const Header = () => {
     return (
         <HeaderContainer>
             <HeaderContent>
-                <Logo>
+                <Logo to="/">
                     <i
                         className="far fa-bookmark"
                         style={{ marginRight: "5px" }}
@@ -20,8 +20,8 @@ const Header = () => {
                     BiblioSym
                 </Logo>
                 <NavItems>
-                    <NavItem>Home</NavItem>
-                    <NavItem>Login</NavItem>
+                    <NavItem to="/">Home</NavItem>
+                    <NavItem to="/login">Login</NavItem>
                 </NavItems>
             </HeaderContent>
         </HeaderContainer>

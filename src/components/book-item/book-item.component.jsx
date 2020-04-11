@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from 'react-router-dom'
 
 import {
     BookItemContainer,
@@ -6,12 +7,17 @@ import {
     Title,
     Author,
     Content,
+    BookItemButton
 } from "./book-item.styles";
 
-const BookItem = ({ title, author, image, quantity }) => {
+import CustomButton from '../custom-button/custom-button.component';
+
+const BookItem = ({ _id, title, author, image, match, history }) => {
     return (
         <BookItemContainer>
-            <Image source={image} />
+            <Image source={image}>
+                <BookItemButton className="btn" onClick={() => history.push(`${match.url}book/${_id}`)}>Ver mais</BookItemButton>
+            </Image>
             <Content>
                 <Title>{title}</Title>
                 <Author>{author}</Author>
@@ -20,4 +26,4 @@ const BookItem = ({ title, author, image, quantity }) => {
     );
 };
 
-export default BookItem;
+export default withRouter(BookItem);

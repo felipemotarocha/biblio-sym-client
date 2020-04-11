@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CustomButton from '../custom-button/custom-button.component';
 
 export const BookItemContainer = styled.div`
     display: flex;
@@ -8,6 +9,9 @@ export const BookItemContainer = styled.div`
 `;
 
 export const Image = styled.div`
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     width: 100%;
     min-height: 250px;
     max-height: 300px;
@@ -15,6 +19,17 @@ export const Image = styled.div`
     background-size: cover;
     background-position: center;
     border-radius: 5px;
+    transition: all 500ms;
+
+    :hover {
+        background-color: rgba(0,0,0,0.3);
+        background-blend-mode: color;
+        /* transform: scale(1.01); */
+
+        .btn {
+            opacity: 100;
+        }
+    }
 `;
 
 export const Content = styled.div`
@@ -32,3 +47,17 @@ export const Title = styled.span`
 export const Author = styled.span`
     font-style: italic;
 `;
+
+export const BookItemButton = styled(CustomButton)`
+    opacity: 0;
+    transition: all 300ms ease-in;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    :hover {
+        background-color: rgba(255, 255, 255, 0.6);
+        color: black;
+    }
+`
