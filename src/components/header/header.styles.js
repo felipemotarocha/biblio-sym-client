@@ -34,6 +34,7 @@ export const NavItems = styled.ul`
     list-style: none;
     font-size: 1rem;
     text-transform: uppercase;
+    align-items: center;
 `;
 
 export const NavItem = styled(Link)`
@@ -47,3 +48,11 @@ export const NavItem = styled(Link)`
         color: #0092ca;
     }
 `;
+
+export const NavIcon = styled.li`
+    padding: 0 20px;
+
+    :hover {
+        cursor: pointer;
+    }
+`

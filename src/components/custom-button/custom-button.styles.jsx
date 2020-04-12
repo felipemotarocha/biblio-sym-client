@@ -5,14 +5,16 @@ export const CustomButtonContainer = styled.button`
     justify-content: center;
     border: 1px solid black;
     padding: 10px;
-    background-color: #fff;
+    background-color: black;
+        color: #fff;
+    
     text-transform: uppercase;
     transition: all 300ms;
     width: 150px;
 
     :hover {
         cursor: pointer;
-        background-color: black;
-        color: #fff;
+        background-color: #eee;
+        color: black;
     }
 `

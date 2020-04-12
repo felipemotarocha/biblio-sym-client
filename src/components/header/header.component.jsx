@@ -6,7 +6,10 @@ import {
     Logo,
     NavItems,
     NavItem,
+    NavIcon
 } from "./header.styles";
+
+import BackPackIcon from '../backpack-icon/backpack-icon.component';
 
 const Header = () => {
     return (
@@ -22,6 +25,7 @@ const Header = () => {
                 <NavItems>
                     <NavItem to="/">Home</NavItem>
                     <NavItem to="/login">Login</NavItem>
+                    <NavIcon><BackPackIcon /></NavIcon>
                 </NavItems>
             </HeaderContent>
         </HeaderContainer>
