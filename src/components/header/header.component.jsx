@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect'
 
 import {
     HeaderContainer,
@@ -8,10 +10,12 @@ import {
     NavItem,
     NavIcon
 } from "./header.styles";
+import { selectBackpackHidden } from '../../redux/backpack/backpack.selectors'
 
 import BackPackIcon from '../backpack-icon/backpack-icon.component';
+import BackpackDropdown from '../backpack-dropdown/backback-dropdown.component'
 
-const Header = () => {
+const Header = ({ backpackHidden }) => {
     return (
         <HeaderContainer>
             <HeaderContent>
@@ -28,8 +32,13 @@ const Header = () => {
                     <NavIcon><BackPackIcon /></NavIcon>
                 </NavItems>
             </HeaderContent>
+            {backpackHidden ? '' : <BackpackDropdown />}
         </HeaderContainer>
     );
 };
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+    backpackHidden: selectBackpackHidden
+})
+
+export default connect(mapStateToProps)(Header);

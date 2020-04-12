@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
+import { createStructuredSelector } from 'reselect'
+import { connect } from 'react-redux'
 
-import { BackPackIconContainer, BackpackIcon } from './backpack-icon.styles'
+import { BackPackIconContainer, BackpackIcon, BooksCount } from './backpack-icon.styles'
+import { selectBackpackBooksCount } from '../../redux/backpack/backpack.selectors'
+import { toggleBackpackHidden } from '../../redux/backpack/backpack.actions'
 
-
-class BackPackIcon extends Component {
-    state = {}
-    render() {
-        return (
-            <BackPackIconContainer>
-                <BackpackIcon />
-            </BackPackIconContainer>
-        );
-    }
+const BackPackIcon = ({ booksCount, dispatch }) => {
+    return (
+        <BackPackIconContainer onClick={() => dispatch(toggleBackpackHidden())}>
+            <BackpackIcon />
+            <BooksCount>{booksCount}</BooksCount>
+        </BackPackIconContainer>
+    )
 }
 
-export default BackPackIcon;
+const mapStateToProps = createStructuredSelector({
+    booksCount: selectBackpackBooksCount
+})
+
+export default connect(mapStateToProps)(BackPackIcon);

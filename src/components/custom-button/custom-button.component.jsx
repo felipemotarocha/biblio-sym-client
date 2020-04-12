@@ -6,7 +6,7 @@ import { CustomButtonContainer } from './custom-button.styles'
 
 const CustomButton = (props) => {
     return (
-        <CustomButtonContainer {...props}>
+        <CustomButtonContainer {...props} onClick={props.handleClick}>
             {props.children}
         </CustomButtonContainer>
     );

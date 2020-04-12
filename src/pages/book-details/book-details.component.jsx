@@ -1,10 +1,13 @@
 import React from "react";
 import axios from "axios";
+import { connect } from 'react-redux'
 
 import {
     BookDetailsContainer, BookImage, BookContent, Header, Title, Author, Content,
     ContentHeadline, Description, Footer, Button, Quantity
 } from "./book-details.styles";
+
+import { addBook } from '../../redux/backpack/backpack.actions'
 
 class BookDetails extends React.Component {
     state = {
@@ -20,7 +23,7 @@ class BookDetails extends React.Component {
         console.log(data);
     }
     render() {
-        const { match: { params: { id } } } = this.props;
+        const { match: { params: { id } }, dispatch } = this.props;
         const { book: { title, author, image, quantity } } = this.state;
 
         return (
@@ -38,7 +41,7 @@ class BookDetails extends React.Component {
                         </Content>
                         <Footer>
                             <Quantity>Available quantity: {quantity}</Quantity>
-                            <Button>Add to backpack</Button>
+                            <Button handleClick={() => dispatch(addBook(this.state.book))}>Add to backpack</Button>
                         </Footer>
                     </BookContent>
                 </BookDetailsContainer>
@@ -47,4 +50,4 @@ class BookDetails extends React.Component {
     }
 }
 
-export default BookDetails;
+export default connect()(BookDetails);
