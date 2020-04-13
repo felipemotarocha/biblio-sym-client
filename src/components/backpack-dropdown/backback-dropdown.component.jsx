@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux'
 
-import { BacpackDropdownContainer, Headline, Button } from './backback-dropdown.styles'
+import { BacpackDropdownContainer, Headline, Button, Books, InfoText } from './backback-dropdown.styles'
+import { selectBackpackBooks } from '../../redux/backpack/backpack.selectors'
 
-class BackpackDropdown extends Component {
-    state = {}
-    render() {
-        return (
-            <BacpackDropdownContainer>
-                <Headline>your backpack</Headline>
-                <Button>GO TO CHECKOUT</Button>
-            </BacpackDropdownContainer>
-        );
-    }
+import BackpackItem from '../backpack-item/backpack-item.component';
+
+const BackpackDropdown = ({ backpackBooks }) => {
+    return (
+        <BacpackDropdownContainer>
+            <Headline>your backpack</Headline>
+            <InfoText>(click on the book to remove)</InfoText>
+            <Books>
+                {backpackBooks.map(({ ...props }) => <BackpackItem {...props} />)}
+            </Books>
+            <Button>GO TO CHECKOUT</Button>
+        </BacpackDropdownContainer>
+    );
 }
 
-export default BackpackDropdown;
+const mapStateToProps = createStructuredSelector({
+    backpackBooks: selectBackpackBooks
+})
+
+export default connect(mapStateToProps)(BackpackDropdown);

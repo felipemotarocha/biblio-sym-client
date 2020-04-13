@@ -18,3 +18,8 @@ export const selectBackpackBooksCount = createSelector(
         return accumulator = accumulator + book.quantity
     }, 0)
 )
+
+export const selectIsBookInBackpack = bookId => createSelector(
+    [selectBackpackBooks],
+    books => books.filter(book => book._id === bookId)
+);
