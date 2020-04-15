@@ -9,7 +9,7 @@ import {
     NavItems,
     NavItem,
     NavIcon
-} from "./header.styles";
+} from "./header.styles.jsx";
 import { selectBackpackHidden } from '../../redux/backpack/backpack.selectors'
 
 import BackPackIcon from '../backpack-icon/backpack-icon.component';
@@ -21,7 +21,7 @@ const Header = ({ backpackHidden }) => {
             <HeaderContent>
                 <Logo to="/">
                     <i
-                        className="far fa-bookmark"
+                        className="fas fa-book"
                         style={{ marginRight: "5px" }}
                     ></i>
                     BiblioSym

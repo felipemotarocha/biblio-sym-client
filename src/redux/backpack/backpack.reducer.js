@@ -13,6 +13,11 @@ const backpackReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 books: addBook(state.books, action.payload)
             }
+        case BackpackActionTypes.REMOVE_BOOK:
+            return {
+                ...state,
+                books: state.books.filter(book => book._id !== action.payload)
+            }
         case BackpackActionTypes.TOGGLE_BACKPACK_HIDDEN:
             return {
                 ...state,

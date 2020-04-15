@@ -1,4 +1,6 @@
 import React from "react";
+import { createStructuredSelector } from 'reselect'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import {
@@ -10,11 +12,15 @@ import {
     BookItemButton
 } from "./book-item.styles";
 
-const BookItem = ({ _id, title, author, image, match, history }) => {
+import { selectBackpackBooks } from "../../redux/backpack/backpack.selectors";
+
+const BookItem = ({ book, dispatch, match, history, backpackBooks }) => {
+    const { _id, title, author, image } = book;
+
     return (
         <BookItemContainer>
             <Image source={image}>
-                <BookItemButton className="btn" handleClick={() => history.push(`${match.url}book/${_id}`)}>Ver mais</BookItemButton>
+                <BookItemButton className="btn" handleClick={() => history.push(`${match.url}book/${_id}`)}>See details</BookItemButton>
             </Image>
             <Content>
                 <Title>{title}</Title>
@@ -24,4 +30,10 @@ const BookItem = ({ _id, title, author, image, match, history }) => {
     );
 };
 
-export default withRouter(BookItem);
+
+const mapStateToProps = createStructuredSelector({
+    backpackBooks: selectBackpackBooks,
+});
+
+
+export default withRouter(connect(mapStateToProps)(BookItem));

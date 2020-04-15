@@ -13,7 +13,7 @@ const BackpackDropdown = ({ backpackBooks }) => {
             <Headline>your backpack</Headline>
             <InfoText>(click on the book to remove)</InfoText>
             <Books>
-                {backpackBooks.map(({ ...props }) => <BackpackItem {...props} />)}
+                {backpackBooks.map(({ ...props }, index) => <BackpackItem key={index} {...props} />)}
             </Books>
             <Button>GO TO CHECKOUT</Button>
         </BacpackDropdownContainer>

@@ -15,7 +15,7 @@ export const selectBackpackHidden = createSelector(
 export const selectBackpackBooksCount = createSelector(
     [selectBackpackBooks],
     books => books.reduce((accumulator, book) => {
-        return accumulator = accumulator + book.quantity
+        return accumulator = accumulator + 1
     }, 0)
 )
 

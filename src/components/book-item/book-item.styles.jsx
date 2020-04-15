@@ -10,8 +10,9 @@ export const BookItemContainer = styled.div`
 
 export const Image = styled.div`
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     width: 100%;
     min-height: 250px;
     max-height: 300px;
@@ -19,7 +20,7 @@ export const Image = styled.div`
     background-size: cover;
     background-position: center;
     border-radius: 5px;
-    transition: all 300ms;
+    transition: all 300ms ease;
     -webkit-box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
     box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
@@ -59,12 +60,6 @@ export const BookItemButton = styled(CustomButton)`
     opacity: 0;
     transition: all 300ms ease-in;
     border-radius: 5px;
-    margin-bottom: 20px;
-    transition: all 200ms;
-
-    :hover {
-        background-color: black;
-        color: #eee;
-        transform: scale(1.01)
-    }
+    transition: all 300ms ease;
+    margin: 10px 0;
 `;

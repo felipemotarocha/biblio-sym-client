@@ -1,11 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
-import { BackpackItemContainer, Image, BookInfo, Title, Author } from './backpack-item.styles'
+import { BackpackItemContainer, ImageContainer, RemoveButton, Image, BookInfo, Title, Author } from './backpack-item.styles'
 
-const BackpackItem = ({ title, author, image }) => {
+import { removeBook } from '../../redux/backpack/backpack.actions'
+
+const BackpackItem = ({ _id, title, author, image, dispatch }) => {
     return (
         <BackpackItemContainer>
-            <Image src={image} />
+            <ImageContainer>
+                <Image className="img" src={image}></Image>
+                <RemoveButton className="remove-btn" onClick={() => dispatch(removeBook(_id))}>&#10005;</RemoveButton>
+            </ImageContainer>
             <BookInfo>
                 <Title>{title}</Title>
                 <Author>{author}</Author>
@@ -14,4 +20,4 @@ const BackpackItem = ({ title, author, image }) => {
     );
 }
 
-export default BackpackItem;
+export default connect()(BackpackItem);

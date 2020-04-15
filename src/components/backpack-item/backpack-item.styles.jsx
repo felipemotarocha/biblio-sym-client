@@ -8,14 +8,42 @@ export const BackpackItemContainer = styled.div`
     margin: 10px 0;
 `
 
-export const Image = styled.img`
-    display: inline-block;
+export const ImageContainer = styled.div`
+    position: relative;
     height: auto;
     width: 60px;
+
+    :hover .remove-btn {
+        opacity: 0.6;
+        cursor: pointer;
+    }
+`
+
+export const Image = styled.img`
+    display: block;
+    height: 100%;
+    width: 60px;
+    backface-visibility: hidden;
     border-radius: 2px;
     -webkit-box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
     box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
+`
+
+export const RemoveButton = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: white;
+    position: absolute;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    transition: .5s ease;
+    background-color: black;
+    border-radius: 3px;
 `
 
 export const BookInfo = styled.div`

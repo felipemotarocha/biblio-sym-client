@@ -9,5 +9,10 @@ export const addBook = (backpackBooks, bookToAdd) => {
     }
 
     // if it is not, add it to backpack
-    return [...backpackBooks, { ...bookToAdd, quantity: 1 }];
+    return [...backpackBooks, bookToAdd];
+};
+
+export const isBookInBackpack = (backpackBooks, bookId) => {
+    const backpackBook = backpackBooks.find((item) => item._id === bookId);
+    return backpackBook;
 };

@@ -19,7 +19,7 @@ class GenrePreview extends React.Component {
                 <GenreTitle>{genre.toUpperCase()}</GenreTitle>
                 <Books>
                     {books.map((book) => (
-                        <BookItem key={book._id} {...book} />
+                        <BookItem key={book._id} book={book} />
                     ))}
                 </Books>
             </GenrePreviewContainer>

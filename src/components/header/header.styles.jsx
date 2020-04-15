@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const HeaderContainer = styled.div`
     width: 100%;
-    height: 70px;
+    height: 85px;
     background: #111;
     color: #fff;
     padding: 8px;
@@ -22,7 +22,7 @@ export const Logo = styled(Link)`
     font-weight: bold;
     text-decoration: none;
     color: inherit;
-    font-size: 1.6rem;
+    font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: 3px;
     font-family: "Montserrat", sans-serif;

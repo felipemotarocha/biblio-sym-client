@@ -20,6 +20,7 @@ import {
 
 import { addBook } from "../../redux/backpack/backpack.actions";
 import { selectBackpackBooks } from "../../redux/backpack/backpack.selectors";
+import { isBookInBackpack } from '../../redux/backpack/backpack.utils'
 
 const BookDetails = ({
     match: {
@@ -40,12 +41,6 @@ const BookDetails = ({
 
         fetchBooks();
     }, []);
-
-    const isBookInBackpack = () => {
-        const backpackBook = backpackBooks.find((item) => item._id === id);
-        console.log("running");
-        return backpackBook;
-    };
 
     const { image, title, author, quantity } = book;
     return (
@@ -74,20 +69,20 @@ const BookDetails = ({
                     <Footer>
                         <Quantity>Available quantity: {quantity}</Quantity>
                         {book ? (
-                            isBookInBackpack() === undefined ? (
+                            isBookInBackpack(backpackBooks, id) === undefined ? (
                                 <Button
                                     handleClick={() => dispatch(addBook(book))}
                                 >
                                     Add to backpack
                                 </Button>
                             ) : (
-                                <ContentHeadline>
-                                    this book is in your backpack.
-                                </ContentHeadline>
-                            )
+                                    <ContentHeadline>
+                                        this book is in your backpack.
+                                    </ContentHeadline>
+                                )
                         ) : (
-                            ""
-                        )}
+                                ""
+                            )}
                     </Footer>
                 </BookContent>
             </BookDetailsContainer>
