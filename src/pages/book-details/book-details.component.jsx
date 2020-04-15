@@ -20,7 +20,7 @@ import {
 
 import { addBook } from "../../redux/backpack/backpack.actions";
 import { selectBackpackBooks } from "../../redux/backpack/backpack.selectors";
-import { isBookInBackpack } from '../../redux/backpack/backpack.utils'
+import { isBookInBackpack } from "../../redux/backpack/backpack.utils";
 
 const BookDetails = ({
     match: {
@@ -36,11 +36,10 @@ const BookDetails = ({
             const REQUEST_URL = "http://localhost:5000/api/books";
             const { data } = await axios.get(`${REQUEST_URL}/${id}`);
             setBook(data);
-            console.log(data);
         };
 
         fetchBooks();
-    }, []);
+    }, [id]);
 
     const { image, title, author, quantity } = book;
     return (
@@ -69,20 +68,21 @@ const BookDetails = ({
                     <Footer>
                         <Quantity>Available quantity: {quantity}</Quantity>
                         {book ? (
-                            isBookInBackpack(backpackBooks, id) === undefined ? (
+                            isBookInBackpack(backpackBooks, id) ===
+                            undefined ? (
                                 <Button
                                     handleClick={() => dispatch(addBook(book))}
                                 >
                                     Add to backpack
                                 </Button>
                             ) : (
-                                    <ContentHeadline>
-                                        this book is in your backpack.
-                                    </ContentHeadline>
-                                )
+                                <ContentHeadline>
+                                    this book is in your backpack.
+                                </ContentHeadline>
+                            )
                         ) : (
-                                ""
-                            )}
+                            ""
+                        )}
                     </Footer>
                 </BookContent>
             </BookDetailsContainer>

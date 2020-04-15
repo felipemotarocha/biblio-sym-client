@@ -28,6 +28,17 @@ export const Books = styled.div`
     overflow-y: auto;
 `;
 
+export const EmptyMessage = styled.span`
+    display: flex;
+    height: 80%;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+`;
+
 export const Headline = styled.span`
     text-align: center;
     text-transform: uppercase;

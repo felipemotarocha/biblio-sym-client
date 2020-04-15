@@ -1,7 +1,8 @@
 export const addBook = (backpackBooks, bookToAdd) => {
     // checking if book is already in backpack
-    const bookInBackpack = backpackBooks.find(book => book._id === bookToAdd._id);
-    console.log(bookInBackpack)
+    const bookInBackpack = backpackBooks.find(
+        (book) => book._id === bookToAdd._id
+    );
 
     // if it is, increase its quantity
     if (bookInBackpack) {
