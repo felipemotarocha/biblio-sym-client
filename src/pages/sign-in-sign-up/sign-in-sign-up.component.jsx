@@ -1,0 +1,17 @@
+import React from "react";
+
+import { Container } from "./sign-in-sign-up.styles";
+
+import SignIn from "../../components/sign-in/sign-in.component";
+import SignUp from "../../components/sign-up/sign-up.component";
+
+const SignInSignUpPage = () => {
+    return (
+        <Container>
+            <SignIn />
+            <SignUp />
+        </Container>
+    );
+};
+
+export default SignInSignUpPage;

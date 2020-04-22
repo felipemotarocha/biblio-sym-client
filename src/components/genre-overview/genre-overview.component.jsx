@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import { GenreOverviewContainer } from './genre-overview.styles'
+import { GenreOverviewContainer } from "./genre-overview.styles";
 
 import { fetchBooksByGenre } from "../../redux/genre/genre.utils";
 import { setBooksByGenre } from "../../redux/genre/genre.actions";
@@ -23,9 +23,11 @@ class GenreOverview extends React.Component {
         return (
             <GenreOverviewContainer>
                 {booksByGenre
-                    ? booksByGenre.map((group, index) => (
-                        <GenrePreview key={index} group={group} />
-                    ))
+                    ? booksByGenre.map((group, index) => {
+                          if (group.books.length > 0) {
+                              return <GenrePreview key={index} group={group} />;
+                          }
+                      })
                     : "loading"}
             </GenreOverviewContainer>
         );

@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export const HeaderContainer = styled.div`
     width: 100%;
-    height: 85px;
+    height: 70px;
     background: #111;
     color: #fff;
     padding: 8px;
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.5);
 `;
 
 export const HeaderContent = styled.div`
@@ -22,7 +23,7 @@ export const Logo = styled(Link)`
     font-weight: bold;
     text-decoration: none;
     color: inherit;
-    font-size: 2rem;
+    font-size: 1.7rem;
     text-transform: uppercase;
     letter-spacing: 3px;
     font-family: "Montserrat", sans-serif;
@@ -33,14 +34,13 @@ export const NavItems = styled.ul`
     display: flex;
     list-style: none;
     font-size: 1rem;
-    text-transform: uppercase;
     align-items: center;
 `;
 
 export const NavItem = styled(Link)`
     text-decoration: none;
     color: inherit;
-    padding: 0 20px;
+    padding: 0 15px;
     transition: color 300ms;
 
     :hover {
@@ -55,4 +55,4 @@ export const NavIcon = styled.li`
     :hover {
         cursor: pointer;
     }
-`
+`;

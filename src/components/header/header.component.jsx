@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect'
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import {
     HeaderContainer,
@@ -8,12 +8,12 @@ import {
     Logo,
     NavItems,
     NavItem,
-    NavIcon
+    NavIcon,
 } from "./header.styles.jsx";
-import { selectBackpackHidden } from '../../redux/backpack/backpack.selectors'
+import { selectBackpackHidden } from "../../redux/backpack/backpack.selectors";
 
-import BackPackIcon from '../backpack-icon/backpack-icon.component';
-import BackpackDropdown from '../backpack-dropdown/backback-dropdown.component'
+import BackPackIcon from "../backpack-icon/backpack-icon.component";
+import BackpackDropdown from "../backpack-dropdown/backback-dropdown.component";
 
 const Header = ({ backpackHidden }) => {
     return (
@@ -28,17 +28,19 @@ const Header = ({ backpackHidden }) => {
                 </Logo>
                 <NavItems>
                     <NavItem to="/">Home</NavItem>
-                    <NavItem to="/login">Login</NavItem>
-                    <NavIcon><BackPackIcon /></NavIcon>
+                    <NavItem to="/sign">Sign In</NavItem>
+                    <NavIcon>
+                        <BackPackIcon />
+                    </NavIcon>
                 </NavItems>
             </HeaderContent>
-            {backpackHidden ? '' : <BackpackDropdown />}
+            {backpackHidden ? "" : <BackpackDropdown />}
         </HeaderContainer>
     );
 };
 
 const mapStateToProps = createStructuredSelector({
-    backpackHidden: selectBackpackHidden
-})
+    backpackHidden: selectBackpackHidden,
+});
 
 export default connect(mapStateToProps)(Header);
