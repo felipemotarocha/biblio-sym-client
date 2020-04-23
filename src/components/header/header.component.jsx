@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { withRouter } from 'react-router-dom'
 
 import {
     HeaderContainer,
@@ -11,11 +12,14 @@ import {
     NavIcon,
 } from "./header.styles.jsx";
 import { selectBackpackHidden } from "../../redux/backpack/backpack.selectors";
+import { toggleUserDropdownHidden } from '../../redux/user/user.actions'
+import { selectCurrentUser, selectUserDropdownHidden } from "../../redux/user/user.selectors.js";
 
 import BackPackIcon from "../backpack-icon/backpack-icon.component";
 import BackpackDropdown from "../backpack-dropdown/backback-dropdown.component";
+import UserDropdown from "../user-dropdown/user-dropdown.component.jsx";
 
-const Header = ({ backpackHidden }) => {
+const Header = ({ backpackHidden, userDropdownHidden, currentUser, dispatch, history }) => {
     return (
         <HeaderContainer>
             <HeaderContent>
@@ -28,7 +32,17 @@ const Header = ({ backpackHidden }) => {
                 </Logo>
                 <NavItems>
                     <NavItem to="/">Home</NavItem>
-                    <NavItem to="/sign">Sign In</NavItem>
+                    {currentUser ?
+                        (
+                            <>
+                                <NavItem as="li" onClick={() => dispatch(toggleUserDropdownHidden())}>{currentUser.name} <i className="fas fa-angle-down"></i></NavItem>
+                                {userDropdownHidden ? '' : <UserDropdown />}
+                            </>
+                        ) :
+                        (
+                            <NavItem to="/sign">Sign In</NavItem>
+                        )
+                    }
                     <NavIcon>
                         <BackPackIcon />
                     </NavIcon>
@@ -41,6 +55,8 @@ const Header = ({ backpackHidden }) => {
 
 const mapStateToProps = createStructuredSelector({
     backpackHidden: selectBackpackHidden,
+    currentUser: selectCurrentUser,
+    userDropdownHidden: selectUserDropdownHidden
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(withRouter(Header));

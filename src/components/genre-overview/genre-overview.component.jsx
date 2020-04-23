@@ -23,11 +23,12 @@ class GenreOverview extends React.Component {
         return (
             <GenreOverviewContainer>
                 {booksByGenre
+                    // eslint-disable-next-line
                     ? booksByGenre.map((group, index) => {
-                          if (group.books.length > 0) {
-                              return <GenrePreview key={index} group={group} />;
-                          }
-                      })
+                        if (group.books.length > 0) {
+                            return <GenrePreview key={index} group={group} />;
+                        }
+                    })
                     : "loading"}
             </GenreOverviewContainer>
         );

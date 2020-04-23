@@ -5,7 +5,6 @@ import { createStructuredSelector } from "reselect";
 import {
     CheckoutContainer,
     CheckoutHeader,
-    CheckoutItems,
     EmptyMessage,
 } from "./checkout.styles";
 import { selectBackpackBooks } from "../../redux/backpack/backpack.selectors";
@@ -26,10 +25,10 @@ const CheckoutPage = ({ backpackBooks }) => {
                     <CheckoutItem key={index} book={book} />
                 ))
             ) : (
-                <EmptyMessage>
-                    <span>Your backpack is empty :(</span>
-                </EmptyMessage>
-            )}
+                    <EmptyMessage>
+                        <span>Your backpack is empty :(</span>
+                    </EmptyMessage>
+                )}
         </CheckoutContainer>
     );
 };

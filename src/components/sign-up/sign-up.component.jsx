@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
 
 import { Container } from "./sign-up.styles";
 
@@ -7,10 +8,18 @@ import CustomInput from "../custom-input/custom-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { userPostFetch } from "../../redux/user/user.actions";
 
-const SignUp = ({ dispatch }) => {
+const SignUp = ({ dispatch, history }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const handleSubmit = async () => {
+        try {
+            dispatch(userPostFetch({ name, email, password }))
+            history.push('/');
+        } catch (err) {
+            alert(err.message);
+        }
+    }
     return (
         <Container>
             <h2>Do not have an account?</h2>
@@ -34,9 +43,7 @@ const SignUp = ({ dispatch }) => {
                 handleChange={({ target: { value } }) => setPassword(value)}
             />
             <CustomButton
-                handleClick={() =>
-                    dispatch(userPostFetch({ name, email, password }))
-                }
+                handleClick={handleSubmit}
             >
                 Sign Up
             </CustomButton>
@@ -44,4 +51,4 @@ const SignUp = ({ dispatch }) => {
     );
 };
 
-export default connect()(SignUp);
+export default connect()(withRouter(SignUp));

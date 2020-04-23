@@ -28,12 +28,35 @@ export const userLoginFetch = (user) => {
             localStorage.setItem("authToken", data.token);
             dispatch(loginUser(data.user));
         } catch (err) {
-            alert("Algo de errado aconteceu, tente novamente.");
+            throw new Error('Something went wrong. Check the data and try again.')
         }
     };
 };
+
+export const userSignOutFetch = () => {
+    return async dispatch => {
+        try {
+            const jwt = localStorage.getItem('authToken');
+            await axios.post(`${REQUEST_URL}/signout`, {}, {
+                headers: { Authorization: `Bearer ${jwt}` }
+            });
+            dispatch(logoutUser());
+            localStorage.removeItem('authToken');
+        } catch (err) {
+            throw new Error('Something went wrong.')
+        }
+    }
+}
 
 export const loginUser = (user) => ({
     type: UserActionTypes.LOGIN_USER,
     payload: user,
 });
+
+export const logoutUser = () => ({
+    type: UserActionTypes.LOGOUT_USER,
+})
+
+export const toggleUserDropdownHidden = () => ({
+    type: UserActionTypes.TOGGLE_USER_DROPDOWN_HIDDEN
+})

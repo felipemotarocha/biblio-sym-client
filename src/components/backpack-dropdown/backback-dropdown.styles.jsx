@@ -9,11 +9,13 @@ export const BacpackDropdownContainer = styled.div`
     align-items: center;
     height: 350px;
     width: 240px;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     border-radius: 5px;
-    background: #eee;
+    background: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
     position: absolute;
-    right: 110px;
+    right: 130px;
     margin-top: 10px;
     padding: 10px 5px;
     z-index: 5;
