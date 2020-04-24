@@ -8,7 +8,7 @@ export const BacpackDropdownContainer = styled.div`
     flex-direction: column;
     align-items: center;
     height: 350px;
-    width: 240px;
+    width: 260px;
     border: 1px solid lightgray;
     border-radius: 5px;
     background: #f9f9f9;
@@ -17,7 +17,7 @@ export const BacpackDropdownContainer = styled.div`
     position: absolute;
     right: 130px;
     margin-top: 10px;
-    padding: 10px 5px;
+    padding: 10px 10px;
     z-index: 5;
 `;
 

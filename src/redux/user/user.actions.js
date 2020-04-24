@@ -48,6 +48,20 @@ export const userSignOutFetch = () => {
     }
 }
 
+// Google OAuth
+export const signInWithGoogleFetch = (user) => {
+    return async dispatch => {
+        try {
+            const response = await axios.post(`${REQUEST_URL}/oauth/google`, user);
+            const data = response.data;
+            localStorage.setItem("authToken", data.token);
+            dispatch(loginUser(data.user));
+        } catch (err) {
+            throw new Error('Something went wrong. Check the data and try again.')
+        }
+    }
+}
+
 export const loginUser = (user) => ({
     type: UserActionTypes.LOGIN_USER,
     payload: user,

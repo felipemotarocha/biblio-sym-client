@@ -19,8 +19,10 @@ export const Image = styled.div`
     background-image: url(${(props) => props.source});
     background-size: cover;
     background-position: center;
+    background-color: none;
+    background-blend-mode: color;
     border-radius: 5px;
-    transition: all 300ms ease;
+    transition: all 500ms ease;
     -webkit-box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
     box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.75);
@@ -58,8 +60,8 @@ export const Author = styled.span`
 
 export const BookItemButton = styled(CustomButton)`
     opacity: 0;
-    transition: all 300ms ease-in;
+    transition: all 500ms ease-in;
     border-radius: 5px;
-    transition: all 300ms ease;
+    transition: all 500ms ease;
     margin: 10px 0;
 `;

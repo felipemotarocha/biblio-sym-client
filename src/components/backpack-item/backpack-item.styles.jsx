@@ -21,8 +21,9 @@ export const ImageContainer = styled.div`
 
 export const Image = styled.img`
     display: block;
-    height: 100%;
+    height: auto;
     width: 60px;
+    height: 100%;
     backface-visibility: hidden;
     border-radius: 2px;
     -webkit-box-shadow: 1px 0px 6px 0px rgba(0, 0, 0, 0.75);
@@ -52,6 +53,7 @@ export const BookInfo = styled.div`
     justify-content: center;
     margin-left: 5px;
     overflow: hidden;
+    padding-right: 5px;
 `;
 
 export const Title = styled.span`
