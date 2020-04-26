@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CheckoutItemContainer = styled.div`
-    width: 80%;
+    width: 100%;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr) 0.5fr;

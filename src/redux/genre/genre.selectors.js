@@ -6,8 +6,3 @@ export const selectGenres = createSelector(
     [selectGenre],
     (genre) => genre.genres
 );
-
-export const selectBooksByGenre = createSelector(
-    [selectGenre],
-    (genre) => genre.booksByGenre
-);

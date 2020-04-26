@@ -13,3 +13,7 @@ export const removeBook = bookId => ({
 export const toggleBackpackHidden = () => ({
     type: BackpackActionTypes.TOGGLE_BACKPACK_HIDDEN,
 });
+
+export const clearBackpack = () => ({
+    type: BackpackActionTypes.CLEAR_BACKPACK
+})

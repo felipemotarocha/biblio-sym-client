@@ -22,6 +22,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 userDropdownHidden: !state.userDropdownHidden
             }
+        case UserActionTypes.ADD_BOOKS:
+            return {
+                ...state,
+                currentUser: { ...state.currentUser, books: action.payload }
+            }
         default:
             return state;
     }

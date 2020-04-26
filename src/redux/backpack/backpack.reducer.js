@@ -25,6 +25,11 @@ const backpackReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 hidden: !state.hidden,
             };
+        case BackpackActionTypes.CLEAR_BACKPACK:
+            return {
+                ...state,
+                books: []
+            }
         default:
             return state;
     }

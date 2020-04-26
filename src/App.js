@@ -9,7 +9,7 @@ import Header from "./components/header/header.component";
 import BookDetails from "./pages/book-details/book-details.component";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
-import Protected from "./components/protected";
+import SuccessfulCheckout from './pages/successful-checkout/successful-checkout.component'
 import AuthenticatedComponent from "./components/authenticated-component/authenticated-component";
 
 import { loginUser } from "./redux/user/user.actions";
@@ -22,7 +22,7 @@ class App extends Component {
       try {
         const data = await getUserProfile();
         dispatch(loginUser(data));
-      } catch (err) {}
+      } catch (err) { }
     }
   }
 
@@ -36,7 +36,7 @@ class App extends Component {
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route exact path="/sign" component={SignInSignUpPage} />
           <AuthenticatedComponent>
-            <Route path="/protected" component={Protected} />
+            <Route exact path="/checkout/successful" component={SuccessfulCheckout} />
           </AuthenticatedComponent>
         </Switch>
       </div>

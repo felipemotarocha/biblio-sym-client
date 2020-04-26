@@ -4,9 +4,9 @@ import { createStructuredSelector } from "reselect";
 
 import { GenreOverviewContainer } from "./genre-overview.styles";
 
-import { fetchBooksByGenre } from "../../redux/genre/genre.utils";
-import { setBooksByGenre } from "../../redux/genre/genre.actions";
-import { selectBooksByGenre } from "../../redux/genre/genre.selectors";
+import { fetchBooksByGenre } from "../../redux/book/book.utils";
+import { setBooksByGenre } from "../../redux/book/book.actions";
+import { selectBooksByGenre } from "../../redux/book/book.selectors";
 
 import GenrePreview from "../genre-preview/genre-preview.component";
 

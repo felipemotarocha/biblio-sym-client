@@ -5,7 +5,3 @@ export const setGenres = (genres) => ({
     payload: genres,
 });
 
-export const setBooksByGenre = (booksByGenre) => ({
-    type: GenreActionTypes.SET_BOOKS_BY_GENRES,
-    payload: booksByGenre,
-});

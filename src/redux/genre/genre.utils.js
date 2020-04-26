@@ -10,8 +10,3 @@ export const fetchGenres = async () => {
         return { id: _id, title };
     });
 };
-
-export const fetchBooksByGenre = async () => {
-    const response = await axios.get(`${REQUEST_URL}/books`);
-    return response.data;
-};

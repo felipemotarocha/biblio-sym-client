@@ -7,7 +7,7 @@ export const BacpackDropdownContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 350px;
+    height: 400px;
     width: 260px;
     border: 1px solid lightgray;
     border-radius: 5px;
@@ -22,7 +22,7 @@ export const BacpackDropdownContainer = styled.div`
 `;
 
 export const Books = styled.div`
-    height: 260px;
+    height: 310px;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;

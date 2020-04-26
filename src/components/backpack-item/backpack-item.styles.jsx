@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BackpackItemContainer = styled.div`
     display: flex;
-    height: 75px;
+    height: 95px;
     width: 100%;
     color: black;
     margin: 10px 0;
@@ -10,8 +10,8 @@ export const BackpackItemContainer = styled.div`
 
 export const ImageContainer = styled.div`
     position: relative;
-    height: auto;
-    width: 60px;
+    height: 90px;
+    width: 70px;
 
     :hover .remove-btn {
         opacity: 0.6;
@@ -22,7 +22,7 @@ export const ImageContainer = styled.div`
 export const Image = styled.img`
     display: block;
     height: auto;
-    width: 60px;
+    width: 100%;
     height: 100%;
     backface-visibility: hidden;
     border-radius: 2px;

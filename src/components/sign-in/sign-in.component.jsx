@@ -47,7 +47,7 @@ const SignIn = ({ dispatch, history }) => {
             <Buttons>
                 <Button handleClick={handleSubmit}>Sign in</Button>
                 <GoogleLogin
-                    clientId={GOOGLE_CREDENTIALS.clientId}
+                    clientId={GOOGLE_CREDENTIALS.clientID}
                     clientSecret={GOOGLE_CREDENTIALS.clientSecret}
                     render={renderProps => (
                         <Button signInWithGoogle handleClick={renderProps.onClick} disabled={renderProps.disabled}>
