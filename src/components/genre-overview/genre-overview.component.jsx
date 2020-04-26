@@ -4,39 +4,25 @@ import { createStructuredSelector } from "reselect";
 
 import { GenreOverviewContainer } from "./genre-overview.styles";
 
-import { fetchBooksByGenre } from "../../redux/book/book.utils";
-import { setBooksByGenre } from "../../redux/book/book.actions";
 import { selectBooksByGenre } from "../../redux/book/book.selectors";
 
 import GenrePreview from "../genre-preview/genre-preview.component";
 
-class GenreOverview extends React.Component {
-    async componentDidMount() {
-        const { dispatch } = this.props;
-
-        const data = await fetchBooksByGenre();
-        dispatch(setBooksByGenre(data));
-    }
-
-    render() {
-        const { booksByGenre } = this.props;
-        return (
-            <GenreOverviewContainer>
-                {booksByGenre
-                    // eslint-disable-next-line
-                    ? booksByGenre.map((group, index) => {
-                        if (group.books.length > 0) {
-                            return <GenrePreview key={index} group={group} />;
-                        }
-                    })
-                    : "loading"}
-            </GenreOverviewContainer>
-        );
-    }
-}
+const GenreOverview = ({ booksByGenre }) => {
+	return (
+		<GenreOverviewContainer>
+			{booksByGenre.map((group, index) => {
+				if (group.books.length > 0) {
+					return <GenrePreview key={index} group={group} />;
+				}
+				return null;
+			})}
+		</GenreOverviewContainer>
+	);
+};
 
 const mapStateToProps = createStructuredSelector({
-    booksByGenre: selectBooksByGenre,
+	booksByGenre: selectBooksByGenre,
 });
 
 export default connect(mapStateToProps)(GenreOverview);

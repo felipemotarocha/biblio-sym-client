@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
 
 import { Container, Header, Books } from "./user-books.styles";
-import { selectCurrentUserBooks } from "../../redux/user/user.selectors";
 import { fetchUserBooks } from "../../redux/user/user.utils";
 
 import UserBook from "../../components/user-book/user-book.component";
+import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
+const BooksWithLoading = LoadingSpinner(Books);
 
-const UserBooks = ({ currentUserBooks }) => {
+const UserBooks = () => {
 	const [books, setBooks] = useState(null);
+	const [isLoading, setLoading] = useState(true);
 	useEffect(() => {
-		fetchUserBooks().then((data) => setBooks(data));
+		fetchUserBooks().then((data) => {
+			setBooks(data);
+			setLoading(false);
+		});
 	}, []);
 	return (
 		<Container>
@@ -20,13 +24,11 @@ const UserBooks = ({ currentUserBooks }) => {
 				<div>Title</div>
 				<div>Author</div>
 			</Header>
-			<Books>{books ? books.map((book, index) => <UserBook key={index} book={book} />) : "Loading..."}</Books>
+			<BooksWithLoading isLoading={isLoading}>
+				{books ? books.map((book, index) => <UserBook key={index} book={book} />) : null}
+			</BooksWithLoading>
 		</Container>
 	);
 };
 
-const mapStateToProps = createStructuredSelector({
-	currentUserBooks: selectCurrentUserBooks,
-});
-
-export default connect(mapStateToProps)(UserBooks);
+export default connect()(UserBooks);

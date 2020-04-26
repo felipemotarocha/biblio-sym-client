@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -16,34 +16,29 @@ import { loginUser } from "./redux/user/user.actions";
 import { getUserProfile } from "./redux/user/user.utils";
 import UserBooks from "./pages/user-books/user-books.component";
 
-class App extends Component {
-	async componentDidMount() {
-		const { dispatch } = this.props;
+const App = ({ dispatch }) => {
+	useEffect(() => {
 		if (localStorage.getItem("authToken")) {
-			try {
-				const data = await getUserProfile();
-				dispatch(loginUser(data));
-			} catch (err) {}
+			getUserProfile().then((data) => dispatch(loginUser(data)));
 		}
-	}
+		// eslint-disable-next-line
+	}, []);
 
-	render() {
-		return (
-			<div>
-				<Header />
-				<Switch>
-					<Route exact path="/" component={HomePage} />
-					<Route exact path="/book/:id" component={BookDetails} />
-					<Route exact path="/checkout" component={CheckoutPage} />
-					<Route exact path="/sign" component={SignInSignUpPage} />
-					<AuthenticatedComponent>
-						<Route exact path="/checkout/successful" component={SuccessfulCheckout} />
-						<Route exact path="/my-books" component={UserBooks} />
-					</AuthenticatedComponent>
-				</Switch>
-			</div>
-		);
-	}
-}
+	return (
+		<div>
+			<Header />
+			<Switch>
+				<Route exact path="/" component={HomePage} />
+				<Route exact path="/book/:id" component={BookDetails} />
+				<Route exact path="/checkout" component={CheckoutPage} />
+				<Route exact path="/sign" component={SignInSignUpPage} />
+				<AuthenticatedComponent>
+					<Route exact path="/checkout/successful" component={SuccessfulCheckout} />
+					<Route exact path="/my-books" component={UserBooks} />
+				</AuthenticatedComponent>
+			</Switch>
+		</div>
+	);
+};
 
 export default connect()(withRouter(App));
