@@ -95,7 +95,7 @@ const BookDetails = ({
 								<ContentHeadline>You already have this book on loan.</ContentHeadline>
 							)
 						) : (
-							<ContentHeadline>This book is not available for loan. Try to come back later.</ContentHeadline>
+							<ContentHeadline>This book is not available for loan :(</ContentHeadline>
 						)}
 					</Footer>
 				</BookContent>
