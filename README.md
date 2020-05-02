@@ -1,8 +1,9 @@
-<h1>What is?</h1>
-Biblio-Sym is a <strong>library application</strong> which allows the user to take books for loan and also gives the administrator a full control of the books stock.
+<h2>What is?</h2>
+<p>Biblio-Sym is a <strong>library application</strong> which allows the user to take books for loan and also gives the administrator a full control of the books stock.</p>
 
-<h1>Why did I built this?</h1>
-I decided to build this application because I like so much to read, and I saw this idea as an opportunity to explore a hobby that I have.
+<h2>Why did I built this?</h2>
+I decided to build this application because I really like to read books, and I saw the idea of creating a library system as an opportunity to explore a hobby that I have, at the same time that I improve my React knowledge.
 
-This will be updated as the application evolves.
-Server side repository: https://github.com/fmroocha/biblio-sym-server
+<h2>Server Side</h2>
+The server side of Biblio-Sym application is in another repository. It's build with Node.js, Express and MongoDB.
+Repository: https://github.com/fmroocha/biblio-sym-server
