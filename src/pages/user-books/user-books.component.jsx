@@ -12,10 +12,12 @@ const UserBooks = () => {
 	const [books, setBooks] = useState(null);
 	const [isLoading, setLoading] = useState(true);
 	useEffect(() => {
-		fetchUserBooks().then((data) => {
-			setBooks(data);
-			setLoading(false);
-		});
+		fetchUserBooks()
+			.then((data) => {
+				setBooks(data);
+				setLoading(false);
+			})
+			.catch((err) => err);
 	}, []);
 	return (
 		<Container>

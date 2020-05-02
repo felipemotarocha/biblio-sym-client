@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 
@@ -14,12 +15,15 @@ import AuthenticatedComponent from "./components/authenticated-component/authent
 
 import { loginUser } from "./redux/user/user.actions";
 import { getUserProfile } from "./redux/user/user.utils";
+import { selectCurrentUser } from "./redux/user/user.selectors";
 import UserBooks from "./pages/user-books/user-books.component";
 
-const App = ({ dispatch }) => {
+const App = ({ dispatch, currentUser }) => {
 	useEffect(() => {
-		if (localStorage.getItem("authToken")) {
-			getUserProfile().then((data) => dispatch(loginUser(data)));
+		if (localStorage.getItem("authToken") && currentUser === null) {
+			getUserProfile().then((data) => {
+				dispatch(loginUser(data));
+			});
 		}
 		// eslint-disable-next-line
 	}, []);
@@ -41,4 +45,8 @@ const App = ({ dispatch }) => {
 	);
 };
 
-export default connect()(withRouter(App));
+const mapStateToProps = createStructuredSelector({
+	currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(withRouter(App));
