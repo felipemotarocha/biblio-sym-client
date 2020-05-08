@@ -1,36 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import { Container, Header, Books } from "./user-books.styles";
-import { fetchUserBooks } from "../../redux/user/user.utils";
+import { selectCurrentUserBooks } from "../../redux/user/user.selectors";
 
 import UserBook from "../../components/user-book/user-book.component";
-import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
-const BooksWithLoading = LoadingSpinner(Books);
 
-const UserBooks = () => {
-	const [books, setBooks] = useState(null);
-	const [isLoading, setLoading] = useState(true);
-	useEffect(() => {
-		fetchUserBooks()
-			.then((data) => {
-				setBooks(data);
-				setLoading(false);
-			})
-			.catch((err) => err);
-	}, []);
-	return (
-		<Container>
-			<Header>
-				<div>Book</div>
-				<div>Title</div>
-				<div>Author</div>
-			</Header>
-			<BooksWithLoading isLoading={isLoading}>
-				{books ? books.map((book, index) => <UserBook key={index} book={book} />) : null}
-			</BooksWithLoading>
-		</Container>
-	);
+const UserBooks = ({ currentUserBooks }) => {
+    return (
+        <Container>
+            <Header>
+                <div>Book</div>
+                <div>Title</div>
+                <div>Author</div>
+            </Header>
+            {currentUserBooks ? (
+                <Books>
+                    {currentUserBooks.map((book, index) => (
+                        <UserBook key={index} book={book} />
+                    ))}
+                </Books>
+            ) : null}
+        </Container>
+    );
 };
 
-export default connect()(UserBooks);
+const mapStateToProps = createStructuredSelector({
+    currentUserBooks: selectCurrentUserBooks,
+});
+
+export default connect(mapStateToProps)(UserBooks);

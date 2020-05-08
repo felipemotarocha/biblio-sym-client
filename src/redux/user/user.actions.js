@@ -84,20 +84,19 @@ export const toggleUserDropdownHidden = () => ({
 export const addUserBooksFetch = (books) => {
 	return async (dispatch) => {
 		try {
-			const bookIds = books.map((book) => book._id);
-			await axios.post(
+			const addedBooks = await axios.post(
 				`${REQUEST_URL}/add-books`,
-				{ bookIds },
+				{ books },
 				{ headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` } }
 			);
-			dispatch(addUserBooks(bookIds));
+			dispatch(addUserBooks(addedBooks));
 		} catch (err) {
 			throw new Error("Something went wrong.");
 		}
 	};
 };
 
-export const addUserBooks = (bookIds) => ({
+export const addUserBooks = (books) => ({
 	type: UserActionTypes.ADD_BOOKS,
-	payload: bookIds,
+	payload: books,
 });

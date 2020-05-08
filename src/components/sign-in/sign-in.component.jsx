@@ -20,7 +20,7 @@ const SignIn = ({ dispatch, history }) => {
             alert(err.message);
         }
     };
-    const handleSignInWithGoogle = async ({ googleId, profileObj: { email, name, imageUrl } }) => {
+    const handleSignInWithGoogle = async ({ googleId, profileObj: { email, name } }) => {
         try {
             await dispatch(signInWithGoogleFetch({ email, name, googleId }));
             history.push('/')
@@ -47,8 +47,7 @@ const SignIn = ({ dispatch, history }) => {
             <Buttons>
                 <Button handleClick={handleSubmit}>Sign in</Button>
                 <GoogleLogin
-                    clientId={GOOGLE_CREDENTIALS.clientID}
-                    clientSecret={GOOGLE_CREDENTIALS.clientSecret}
+                    clientId={GOOGLE_CREDENTIALS.clientId}
                     render={renderProps => (
                         <Button signInWithGoogle handleClick={renderProps.onClick} disabled={renderProps.disabled}>
                             <i className="fab fa-google"></i>Sign in with Google

@@ -2,4 +2,12 @@ import { createSelector } from "reselect";
 
 const selectBook = (state) => state.book;
 
-export const selectBooksByGenre = createSelector([selectBook], (book) => book.booksByGenre);
+export const selectBooksByGenre = createSelector(
+    [selectBook],
+    (book) => book.booksByGenres
+);
+
+export const selectAreBooksFetching = createSelector(
+    [selectBook],
+    (book) => book.isFetching
+);

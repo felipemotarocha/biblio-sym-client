@@ -1,16 +1,30 @@
 import BookActionTypes from "./book.types";
 
 const INITIAL_STATE = {
-	booksByGenre: null,
+	booksByGenres: null,
+	isFetching: true,
+	error: null,
 };
 
 const bookReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case BookActionTypes.SET_BOOKS_BY_GENRES:
+		case BookActionTypes.FETCH_BOOKS_BY_GENRES_START:
 			return {
 				...state,
-				booksByGenre: action.payload,
+				isFetching: true,
 			};
+		case BookActionTypes.FETCH_BOOKS_BY_GENRES_SUCCESS:
+			return {
+				...state,
+				booksByGenres: action.payload,
+				isFetching: false,
+			};
+		case BookActionTypes.FETCH_BOOKS_BY_GENRES_FAILURE:
+			return {
+				...state,
+				isFetching: false,
+				error: action.payload,
+			}
 		default:
 			return state;
 	}

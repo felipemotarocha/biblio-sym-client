@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { fetchBooksByGenre } from "../../redux/book/book.utils";
-import { setBooksByGenre } from "../../redux/book/book.actions";
+import { fetchBooksByGenresStart } from "../../redux/book/book.actions";
 
-import GenreOverview from "../../components/genre-overview/genre-overview.component";
-import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
-
-const GenreOverviewWithLoading = LoadingSpinner(GenreOverview);
+import GenreOverviewContainer from "../../components/genre-overview/genre-overview.container";
 
 const HomePage = ({ dispatch }) => {
-	const [isLoading, setLoading] = useState(true);
 	useEffect(() => {
-		fetchBooksByGenre().then((data) => {
-			dispatch(setBooksByGenre(data));
-			setLoading(false);
-		});
+		dispatch(fetchBooksByGenresStart());
 		// eslint-disable-next-line
 	}, []);
 	return (
 		<div>
-			<GenreOverviewWithLoading isLoading={isLoading} />
+			<GenreOverviewContainer />
 		</div>
 	);
 };

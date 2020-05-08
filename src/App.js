@@ -7,7 +7,7 @@ import "./App.css";
 
 import HomePage from "./pages/homepage/homepage.component";
 import Header from "./components/header/header.component";
-import BookDetails from "./pages/book-details/book-details.component";
+import BookDetailsContainer from "./pages/book-details/book-details.container";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 import SuccessfulCheckout from "./pages/successful-checkout/successful-checkout.component";
@@ -33,7 +33,7 @@ const App = ({ dispatch, currentUser }) => {
 			<Header />
 			<Switch>
 				<Route exact path="/" component={HomePage} />
-				<Route exact path="/book/:id" component={BookDetails} />
+				<Route exact path="/book/:id" component={BookDetailsContainer} />
 				<Route exact path="/checkout" component={CheckoutPage} />
 				<Route exact path="/sign" component={SignInSignUpPage} />
 				<AuthenticatedComponent>
