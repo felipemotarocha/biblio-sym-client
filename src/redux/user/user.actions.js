@@ -1,102 +1,57 @@
-import axios from "axios";
 import UserActionTypes from "./user.types";
 
-const REQUEST_URL = "http://localhost:5000/api/users";
-
-// Authentication
-export const userPostFetch = (user) => {
-	return async (dispatch) => {
-		try {
-			const response = await axios.post(REQUEST_URL, user);
-			const data = response.data;
-			console.log(data);
-			localStorage.setItem("authToken", data.token);
-			dispatch(loginUser(data.user));
-		} catch (err) {
-			const errors = err.response.data.errors;
-			Object.entries(errors).forEach((error) => {
-				alert(error[1].message);
-			});
-		}
-	};
-};
-
-export const userLoginFetch = (user) => {
-	return async (dispatch) => {
-		try {
-			const response = await axios.post(`${REQUEST_URL}/sign-in`, user);
-			const data = response.data;
-			localStorage.setItem("authToken", data.token);
-			dispatch(loginUser(data.user));
-		} catch (err) {
-			throw new Error("Something went wrong. Check the data and try again.");
-		}
-	};
-};
-
-export const userSignOutFetch = () => {
-	return async (dispatch) => {
-		try {
-			const jwt = localStorage.getItem("authToken");
-			await axios.post(
-				`${REQUEST_URL}/sign-out`,
-				{},
-				{
-					headers: { Authorization: `Bearer ${jwt}` },
-				}
-			);
-			dispatch(logoutUser());
-			localStorage.removeItem("authToken");
-		} catch (err) {
-			throw new Error("Something went wrong.");
-		}
-	};
-};
-
-// Google OAuth
-export const signInWithGoogleFetch = (user) => {
-	return async (dispatch) => {
-		try {
-			const response = await axios.post(`${REQUEST_URL}/oauth/google`, user);
-			const data = response.data;
-			localStorage.setItem("authToken", data.token);
-			dispatch(loginUser(data.user));
-		} catch (err) {
-			throw new Error("Something went wrong. Check the data and try again.");
-		}
-	};
-};
-
-export const loginUser = (user) => ({
-	type: UserActionTypes.LOGIN_USER,
+export const signUpUserStart = (user) => ({
+	type: UserActionTypes.SIGN_UP_USER_START,
 	payload: user,
 });
 
-export const logoutUser = () => ({
-	type: UserActionTypes.LOGOUT_USER,
+export const signUpUserSuccess = (user) => ({
+	type: UserActionTypes.SIGN_UP_USER_SUCCESS,
+	payload: user,
+});
+
+export const singUpUserFailure = (error) => ({
+	type: UserActionTypes.SIGN_UP_USER_FAILURE,
+	payload: error,
+});
+
+export const signInWithEmailStart = (user) => ({
+	type: UserActionTypes.EMAIL_SIGN_IN_START,
+	payload: user,
+});
+
+export const signInWithGoogleStart = (user) => ({
+	type: UserActionTypes.GOOGLE_SIGN_IN_START,
+	payload: user,
+});
+
+export const signInUserSuccess = (user) => ({
+	type: UserActionTypes.SIGN_IN_USER_SUCCESS,
+	payload: user,
+});
+
+export const signInUserFailure = (error) => ({
+	type: UserActionTypes.SIGN_IN_USER_FAILURE,
+	payload: error,
+});
+
+export const signOutUserStart = () => ({
+	type: UserActionTypes.SIGN_OUT_USER_START,
+});
+
+export const signOutUserSuccess = () => ({
+	type: UserActionTypes.SIGN_OUT_USER_SUCCESS,
+});
+
+export const signOutUserFailure = (error) => ({
+	type: UserActionTypes.SIGN_OUT_USER_FAILURE,
+	payload: error,
+});
+
+export const checkUserSession = () => ({
+	type: UserActionTypes.CHECK_USER_SESSION,
 });
 
 export const toggleUserDropdownHidden = () => ({
 	type: UserActionTypes.TOGGLE_USER_DROPDOWN_HIDDEN,
-});
-
-// Add Books
-export const addUserBooksFetch = (books) => {
-	return async (dispatch) => {
-		try {
-			const addedBooks = await axios.post(
-				`${REQUEST_URL}/add-books`,
-				{ books },
-				{ headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` } }
-			);
-			dispatch(addUserBooks(addedBooks));
-		} catch (err) {
-			throw new Error("Something went wrong.");
-		}
-	};
-};
-
-export const addUserBooks = (books) => ({
-	type: UserActionTypes.ADD_BOOKS,
-	payload: books,
 });

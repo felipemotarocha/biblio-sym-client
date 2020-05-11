@@ -4,7 +4,10 @@ import { withRouter } from "react-router-dom";
 
 import { Container, Item } from "./user-dropdown.styles";
 
-import { userSignOutFetch, toggleUserDropdownHidden } from "../../redux/user/user.actions";
+import {
+	signOutUserStart,
+	toggleUserDropdownHidden,
+} from "../../redux/user/user.actions";
 
 const UserDropdown = ({ dispatch, history }) => {
 	return (
@@ -19,7 +22,7 @@ const UserDropdown = ({ dispatch, history }) => {
 			</Item>
 			<Item
 				onClick={() => {
-					dispatch(userSignOutFetch());
+					dispatch(signOutUserStart());
 					dispatch(toggleUserDropdownHidden());
 					history.push("/");
 				}}

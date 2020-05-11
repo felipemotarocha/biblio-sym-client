@@ -13,17 +13,14 @@ import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component"
 import SuccessfulCheckout from "./pages/successful-checkout/successful-checkout.component";
 import AuthenticatedComponent from "./components/authenticated-component/authenticated-component";
 
-import { loginUser } from "./redux/user/user.actions";
-import { getUserProfile } from "./redux/user/user.utils";
+import { checkUserSession } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import UserBooks from "./pages/user-books/user-books.component";
 
 const App = ({ dispatch, currentUser }) => {
 	useEffect(() => {
 		if (localStorage.getItem("authToken") && currentUser === null) {
-			getUserProfile().then((data) => {
-				dispatch(loginUser(data));
-			});
+			dispatch(checkUserSession());
 		}
 		// eslint-disable-next-line
 	}, []);
@@ -33,11 +30,19 @@ const App = ({ dispatch, currentUser }) => {
 			<Header />
 			<Switch>
 				<Route exact path="/" component={HomePage} />
-				<Route exact path="/book/:id" component={BookDetailsContainer} />
+				<Route
+					exact
+					path="/book/:id"
+					component={BookDetailsContainer}
+				/>
 				<Route exact path="/checkout" component={CheckoutPage} />
 				<Route exact path="/sign" component={SignInSignUpPage} />
 				<AuthenticatedComponent>
-					<Route exact path="/checkout/successful" component={SuccessfulCheckout} />
+					<Route
+						exact
+						path="/checkout/successful"
+						component={SuccessfulCheckout}
+					/>
 					<Route exact path="/my-books" component={UserBooks} />
 				</AuthenticatedComponent>
 			</Switch>

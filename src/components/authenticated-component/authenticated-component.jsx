@@ -1,27 +1,25 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { createStructuredSelector } from "reselect";
 
-import { loginUser } from "../../redux/user/user.actions";
-import { getUserProfile } from "../../redux/user/user.utils";
+import { checkUserSession } from "../../redux/user/user.actions";
+import { selectUserError } from "../../redux/user/user.selectors";
 
-const AuthenticatedComponent = ({ dispatch, children, history }) => {
-	const getUser = async () => {
-		try {
-			const data = await getUserProfile();
-			dispatch(loginUser(data));
-		} catch (err) {
-			history.push("/sign");
-		}
-	};
+const AuthenticatedComponent = ({ dispatch, children, history, userError }) => {
 	useEffect(() => {
-		if (!localStorage.getItem("authToken")) {
+		if (!localStorage.getItem("authToken") || userError) {
 			history.push("/sign");
 		} else {
-			getUser();
+			dispatch(checkUserSession());
 		}
 	}, []);
+
 	return <div>{children}</div>;
 };
 
-export default connect()(withRouter(AuthenticatedComponent));
+const mapStateToProps = createStructuredSelector({
+	userError: selectUserError,
+});
+
+export default connect(mapStateToProps)(withRouter(AuthenticatedComponent));
