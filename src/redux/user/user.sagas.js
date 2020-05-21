@@ -21,7 +21,7 @@ function* signUp({ payload }) {
 		localStorage.setItem("authToken", token);
 		yield put(signUpUserSuccess(user));
 	} catch (error) {
-		yield put(singUpUserFailure(error));
+		yield put(singUpUserFailure(error.response));
 	}
 }
 
@@ -33,7 +33,7 @@ function* signInWithEmail({ payload }) {
 		yield localStorage.setItem("authToken", token);
 		yield put(signInUserSuccess(user));
 	} catch (error) {
-		yield put(signInUserFailure(error));
+		yield put(signInUserFailure(error.response));
 	}
 }
 
@@ -46,7 +46,7 @@ function* signInWithGoogle({ payload }) {
 		localStorage.setItem("authToken", token);
 		yield put(signInUserSuccess(user));
 	} catch (error) {
-		yield put(signInUserFailure(error));
+		yield put(signInUserFailure(error.response));
 	}
 }
 
@@ -63,7 +63,7 @@ export function* signOut() {
 		localStorage.removeItem("authToken");
 		yield put(signOutUserSuccess());
 	} catch (error) {
-		yield put(signOutUserFailure(error));
+		yield put(signOutUserFailure(error.response));
 	}
 }
 
@@ -76,7 +76,7 @@ export function* checkUserSession() {
 		yield put(signInUserSuccess(data));
 	} catch (error) {
 		localStorage.removeItem("authToken");
-		yield put(signInUserFailure(error));
+		yield put(signInUserFailure(error.response));
 	}
 }
 

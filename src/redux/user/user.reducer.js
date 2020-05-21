@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 	isLoading: null,
 	currentUser: null,
 	userDropdownHidden: true,
-	error: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -15,7 +14,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				currentUser: action.payload,
-				error: null,
 				isLoading: false,
 			};
 		}
@@ -23,7 +21,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				currentUser: null,
-				error: null,
 				isLoading: false,
 			};
 		case UserActionTypes.SIGN_UP_USER_FAILURE:
@@ -31,7 +28,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
 		case UserActionTypes.SIGN_OUT_USER_FAILURE:
 			return {
 				...state,
-				error: action.payload,
 				isLoading: false,
 			};
 		case UserActionTypes.CHECK_USER_SESSION:

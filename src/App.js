@@ -12,6 +12,7 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 import SuccessfulCheckout from "./pages/successful-checkout/successful-checkout.component";
 import AuthenticatedComponent from "./components/authenticated-component/authenticated-component";
+import ErrorMessage from "./components/error-message/error-message.component";
 
 import { checkUserSession } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
@@ -36,7 +37,9 @@ const App = ({ dispatch, currentUser }) => {
 					component={BookDetailsContainer}
 				/>
 				<Route exact path="/checkout" component={CheckoutPage} />
-				<Route exact path="/sign" component={SignInSignUpPage} />
+				<ErrorMessage>
+					<Route exact path="/sign" component={SignInSignUpPage} />
+				</ErrorMessage>
 				<AuthenticatedComponent>
 					<Route
 						exact
