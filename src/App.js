@@ -12,10 +12,14 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 import SuccessfulCheckout from "./pages/successful-checkout/successful-checkout.component";
 import AuthenticatedComponent from "./components/authenticated-component/authenticated-component";
-import ErrorMessage from "./components/error-message/error-message.component";
+import AdminComponent from "./components/admin-component/admin-component";
+import AdminPanel from "./pages/admin-panel/admin-panel.component";
 
 import { checkUserSession } from "./redux/user/user.actions";
-import { selectCurrentUser } from "./redux/user/user.selectors";
+import {
+	selectCurrentUser,
+	selectIsLoading,
+} from "./redux/user/user.selectors";
 import UserBooks from "./pages/user-books/user-books.component";
 
 const App = ({ dispatch, currentUser }) => {
@@ -23,23 +27,17 @@ const App = ({ dispatch, currentUser }) => {
 		if (localStorage.getItem("authToken") && currentUser === null) {
 			dispatch(checkUserSession());
 		}
-		// eslint-disable-next-line
-	}, []);
+	}, [currentUser, dispatch]);
 
 	return (
 		<div>
 			<Header />
 			<Switch>
 				<Route exact path="/" component={HomePage} />
-				<Route
-					exact
-					path="/book/:id"
-					component={BookDetailsContainer}
-				/>
+				<Route exact path="/book/:id" component={BookDetailsContainer} />
 				<Route exact path="/checkout" component={CheckoutPage} />
-				<ErrorMessage>
-					<Route exact path="/sign" component={SignInSignUpPage} />
-				</ErrorMessage>
+				<Route exact path="/sign" component={SignInSignUpPage} />
+
 				<AuthenticatedComponent>
 					<Route
 						exact
@@ -47,6 +45,9 @@ const App = ({ dispatch, currentUser }) => {
 						component={SuccessfulCheckout}
 					/>
 					<Route exact path="/my-books" component={UserBooks} />
+					<AdminComponent>
+						<Route exact path="/admin" component={AdminPanel} />
+					</AdminComponent>
 				</AuthenticatedComponent>
 			</Switch>
 		</div>
@@ -55,6 +56,7 @@ const App = ({ dispatch, currentUser }) => {
 
 const mapStateToProps = createStructuredSelector({
 	currentUser: selectCurrentUser,
+	isLoading: selectIsLoading,
 });
 
 export default connect(mapStateToProps)(withRouter(App));

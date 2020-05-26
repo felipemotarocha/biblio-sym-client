@@ -27,9 +27,7 @@ const SignIn = ({ dispatch, history }) => {
 		profileObj: { email, name },
 	}) => {
 		try {
-			dispatch(
-				signInWithGoogleStart({ user: { email, name, googleId } })
-			);
+			dispatch(signInWithGoogleStart({ user: { email, name, googleId } }));
 		} catch (error) {
 			console.log("i am fired");
 		}

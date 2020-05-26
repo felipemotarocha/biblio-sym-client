@@ -4,17 +4,17 @@ import { createStructuredSelector } from "reselect";
 
 import { Container } from "./sign-in-sign-up.styles";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { selectErrorMessage } from "../../redux/error/error.selectors";
+import { selectErrorMessage } from "../../redux/alert/alert.selectors";
 
 import SignIn from "../../components/sign-in/sign-in.component";
 import SignUp from "../../components/sign-up/sign-up.component";
-import ErrorMessage from "../../components/error-message/error-message.component";
 
 const SignInSignUpPage = ({ currentUser, errorMessage, history }) => {
 	useEffect(() => {
 		if (currentUser && !errorMessage) {
 			history.push("/");
 		}
+		// eslint-disable-next-line
 	}, [currentUser]);
 	return (
 		<Container>

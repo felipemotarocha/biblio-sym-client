@@ -11,12 +11,14 @@ import GenrePreview from "../genre-preview/genre-preview.component";
 const GenreOverview = ({ booksByGenre }) => {
 	return (
 		<GenreOverviewContainer>
-			{booksByGenre.map((group, index) => {
-				if (group.books.length > 0) {
-					return <GenrePreview key={index} group={group} />;
-				}
-				return null;
-			})}
+			{booksByGenre
+				? booksByGenre.map((group, index) => {
+						if (group.books.length > 0) {
+							return <GenrePreview key={index} group={group} />;
+						}
+						return "";
+				  })
+				: ""}
 		</GenreOverviewContainer>
 	);
 };

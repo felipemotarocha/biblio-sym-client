@@ -20,8 +20,8 @@ function* signUp({ payload }) {
 		} = yield axios.post(REQUEST_URL, payload.user);
 		localStorage.setItem("authToken", token);
 		yield put(signUpUserSuccess(user));
-	} catch (error) {
-		yield put(singUpUserFailure(error.response));
+	} catch ({ response: { data } }) {
+		yield put(singUpUserFailure(data));
 	}
 }
 
@@ -32,8 +32,8 @@ function* signInWithEmail({ payload }) {
 		} = yield axios.post(`${REQUEST_URL}/sign-in`, payload.user);
 		yield localStorage.setItem("authToken", token);
 		yield put(signInUserSuccess(user));
-	} catch (error) {
-		yield put(signInUserFailure(error.response));
+	} catch ({ response: { data } }) {
+		yield put(signInUserFailure(data));
 	}
 }
 
@@ -45,8 +45,8 @@ function* signInWithGoogle({ payload }) {
 		} = yield axios.post(`${REQUEST_URL}/oauth/google`, payload.user);
 		localStorage.setItem("authToken", token);
 		yield put(signInUserSuccess(user));
-	} catch (error) {
-		yield put(signInUserFailure(error.response));
+	} catch ({ response: { data } }) {
+		yield put(signInUserFailure(data));
 	}
 }
 
@@ -62,8 +62,8 @@ export function* signOut() {
 		);
 		localStorage.removeItem("authToken");
 		yield put(signOutUserSuccess());
-	} catch (error) {
-		yield put(signOutUserFailure(error.response));
+	} catch ({ response: { data } }) {
+		yield put(signOutUserFailure(data));
 	}
 }
 
@@ -74,9 +74,9 @@ export function* checkUserSession() {
 			headers: { Authorization: `Bearer ${authToken}` },
 		});
 		yield put(signInUserSuccess(data));
-	} catch (error) {
+	} catch ({ response: { data } }) {
 		localStorage.removeItem("authToken");
-		yield put(signInUserFailure(error.response));
+		yield put(signInUserFailure(data));
 	}
 }
 

@@ -13,6 +13,7 @@ const AuthenticatedComponent = ({ dispatch, children, history, userError }) => {
 		} else {
 			dispatch(checkUserSession());
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	return <div>{children}</div>;

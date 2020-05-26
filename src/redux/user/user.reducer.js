@@ -28,6 +28,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
 		case UserActionTypes.SIGN_OUT_USER_FAILURE:
 			return {
 				...state,
+				currentUser: null,
 				isLoading: false,
 			};
 		case UserActionTypes.CHECK_USER_SESSION:

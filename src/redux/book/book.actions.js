@@ -11,7 +11,21 @@ export const fetchBooksByGenresSuccess = (books) => ({
 
 export const fetchBooksByGenresFailure = (error) => ({
 	type: BookActionTypes.FETCH_BOOKS_BY_GENRES_FAILURE,
-	payload: error,
+	error: error,
+});
+
+export const fetchAllBooksStart = () => ({
+	type: BookActionTypes.FETCH_ALL_BOOK_START,
+});
+
+export const fetchAllBooksSuccess = (books) => ({
+	type: BookActionTypes.FETCH_ALL_BOOK_SUCCESS,
+	payload: books,
+});
+
+export const fetchAllBooksFailure = (error) => ({
+	type: BookActionTypes.FETCH_ALL_BOOK_FAILURE,
+	error: error,
 });
 
 export const bookLoanStart = (books) => ({
@@ -27,4 +41,39 @@ export const bookLoanSuccess = (loanedBooks) => ({
 export const bookLoanFailure = (error) => ({
 	type: BookActionTypes.BOOK_LOAN_FAILURE,
 	eror: error,
+});
+
+export const addNewBookStart = (book) => ({
+	type: BookActionTypes.ADD_NEW_BOOK_START,
+	payload: book,
+});
+
+export const addNewBookSuccess = () => ({
+	type: BookActionTypes.ADD_NEW_BOOK_SUCCESS,
+	alertMessage: "The book was succesfully added!",
+});
+
+export const addNewBookFailure = (error) => ({
+	type: BookActionTypes.ADD_NEW_BOOK_FAILURE,
+	error: error,
+});
+
+export const addExistentBookStart = (book) => ({
+	type: BookActionTypes.ADD_EXISTENT_BOOK_START,
+	payload: book,
+});
+
+export const addExistentBookSuccess = () => ({
+	type: BookActionTypes.ADD_EXISTENT_BOOK_SUCCESS,
+	alertMessage: "The book was succesfully added!",
+});
+
+export const addExistentBookFailure = (error) => ({
+	type: BookActionTypes.ADD_EXISTENT_BOOK_FAILURE,
+	error: error,
+});
+
+export const updateBooks = (books) => ({
+	type: BookActionTypes.UPDATE_BOOKS,
+	payload: books,
 });
