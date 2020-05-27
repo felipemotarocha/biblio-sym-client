@@ -18,3 +18,18 @@ export const fetchGenresFailure = (error) => ({
 	type: GenreActionTypes.FETCH_GENRES_FAILURE,
 	error,
 });
+
+export const addGenreStart = (genre) => ({
+	type: GenreActionTypes.ADD_GENRE_START,
+	payload: genre,
+});
+
+export const addGenreSuccess = () => ({
+	type: GenreActionTypes.ADD_GENRE_SUCCESS,
+	alertMessage: "The genre was sucessfully added!",
+});
+
+export const addGenreFailure = (error) => ({
+	type: GenreActionTypes.ADD_GENRE_FAILURE,
+	error,
+});

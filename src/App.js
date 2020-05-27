@@ -12,7 +12,6 @@ import CheckoutPage from "./pages/checkout/checkout.component";
 import SignInSignUpPage from "./pages/sign-in-sign-up/sign-in-sign-up.component";
 import SuccessfulCheckout from "./pages/successful-checkout/successful-checkout.component";
 import AuthenticatedComponent from "./components/authenticated-component/authenticated-component";
-import AdminComponent from "./components/admin-component/admin-component";
 import AdminPanel from "./pages/admin-panel/admin-panel.component";
 
 import { checkUserSession } from "./redux/user/user.actions";
@@ -45,9 +44,7 @@ const App = ({ dispatch, currentUser }) => {
 						component={SuccessfulCheckout}
 					/>
 					<Route exact path="/my-books" component={UserBooks} />
-					<AdminComponent>
-						<Route exact path="/admin" component={AdminPanel} />
-					</AdminComponent>
+					<Route exact path="/admin" component={AdminPanel} />
 				</AuthenticatedComponent>
 			</Switch>
 		</div>

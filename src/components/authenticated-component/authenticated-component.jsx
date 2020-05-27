@@ -10,6 +10,7 @@ const AuthenticatedComponent = ({ dispatch, children, history, userError }) => {
 	useEffect(() => {
 		if (!localStorage.getItem("authToken") || userError) {
 			history.push("/sign");
+			console.log("redirecting");
 		} else {
 			dispatch(checkUserSession());
 		}

@@ -1,37 +1,45 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { Container, Item } from "./admin-panel.styles";
-import { fetchGenresStart } from "../../redux/genre/genre.actions";
-import { selectIsLoading } from "../../redux/genre/genre.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import AddBook from "../../components/add-book/add-book.component";
+import AddGenre from "../../components/add-genre/add-genre.component";
 import AlertMessage from "../../components/alert-message/alert-message.component";
 
-const AdminPanel = ({ isLoading }) => {
-	const dispatch = useDispatch();
+const AdminPanel = ({ currentUser }) => {
+	const history = useHistory();
 	useEffect(() => {
-		dispatch(fetchGenresStart());
-	}, [dispatch]);
+		if (currentUser) {
+			if (!currentUser.isAdmin) {
+				history.push("/");
+			}
+		}
+	}, [currentUser, history]);
 	return (
 		<AlertMessage>
-			<Container>
-				<Item>
-					<AddBook isLoading={isLoading} />
-				</Item>
-				<Item>
-					<h1>REMOVE BOOK</h1>
-				</Item>
-			</Container>
+			{currentUser ? (
+				<Container>
+					<Item>
+						<AddBook />
+					</Item>
+					<Item>
+						<AddGenre />
+					</Item>
+				</Container>
+			) : (
+				""
+			)}
 		</AlertMessage>
 	);
 };
 
 const mapStateToProps = createStructuredSelector({
-	isLoading: selectIsLoading,
+	currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(AdminPanel);

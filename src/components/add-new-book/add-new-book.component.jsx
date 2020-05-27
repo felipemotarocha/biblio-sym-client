@@ -13,11 +13,16 @@ import PersonIcon from "@material-ui/icons/Person";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 import { Container, ItemContainer, Item } from "./add-new-book.styles";
-import { selectGenres } from "../../redux/genre/genre.selectors";
+import {
+	selectGenres,
+	selectIsLoading,
+} from "../../redux/genre/genre.selectors";
+import { fetchGenresStart } from "../../redux/genre/genre.actions";
 import {
 	addNewBookStart,
 	addNewBookFailure,
 } from "../../redux/book/book.actions";
+import { useEffect } from "react";
 
 const theme = createMuiTheme({
 	palette: {
@@ -27,13 +32,17 @@ const theme = createMuiTheme({
 	},
 });
 
-const AddBook = ({ genres, isLoading, dispatch }) => {
+const AddBook = ({ genres, dispatch, isLoading }) => {
 	const [title, setTitle] = useState("");
 	const [author, setAuthor] = useState("");
 	const [genreTitle, setGenreTitle] = useState("");
 	const [genreId, setGenreId] = useState("");
 	const [imageUrl, setImageUrl] = useState("");
 	const [availableForLoan, setAvailableForLoan] = useState("");
+
+	useEffect(() => {
+		dispatch(fetchGenresStart());
+	}, [dispatch]);
 
 	const handleSubmit = () => {
 		if (title && author && genreId && imageUrl && availableForLoan) {
@@ -109,11 +118,18 @@ const AddBook = ({ genres, isLoading, dispatch }) => {
 											newValue.title.slice(1)
 									);
 									setGenreId(newValue._id);
+								} else {
+									setGenreTitle("");
+									setGenreId("");
 								}
 							}}
-							// loading={isLoading}
+							loading={isLoading}
+							loadingText="Loading..."
 							options={genres ? genres : []}
-							getOptionSelected={(option, value) => option.title === value}
+							getOptionSelected={(option, value) =>
+								option.title.charAt(0).toUpperCase() + option.title.slice(1) ===
+								value
+							}
 							getOptionLabel={(genre) =>
 								genre.title
 									? genre.title.charAt(0).toUpperCase() + genre.title.slice(1)
@@ -151,10 +167,13 @@ const AddBook = ({ genres, isLoading, dispatch }) => {
 					</Item>
 					<Item>
 						<TextField
-							value={availableForLoan}
+							type="number"
 							id="availableForLoan"
 							label="Quantity available for loan"
-							onChange={(e) => setAvailableForLoan(e.target.value)}
+							value={availableForLoan}
+							onChange={({ target: { value } }) =>
+								setAvailableForLoan(parseInt(value))
+							}
 							style={{ width: "100%" }}
 							variant="outlined"
 							required
@@ -183,6 +202,7 @@ const AddBook = ({ genres, isLoading, dispatch }) => {
 
 const mapStateToProps = createStructuredSelector({
 	genres: selectGenres,
+	isLoading: selectIsLoading,
 });
 
 export default connect(mapStateToProps)(AddBook);

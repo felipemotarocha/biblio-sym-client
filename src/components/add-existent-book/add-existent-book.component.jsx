@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { TextField, Button } from "@material-ui/core";
@@ -11,15 +11,17 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { blue } from "@material-ui/core/colors";
 
 import { Container, ItemContainer, Item } from "./add-existent-book.styles";
-import { selectAllBooks } from "../../redux/book/book.selectors";
+import {
+	selectAllBooks,
+	selectAreBooksFetching,
+} from "../../redux/book/book.selectors";
 import { fetchAllBooksStart } from "../../redux/book/book.actions";
-import { useEffect } from "react";
 import {
 	addExistentBookStart,
 	addExistentBookFailure,
 } from "../../redux/book/book.actions";
 
-const AddExistentBook = ({ allBooks, dispatch }) => {
+const AddExistentBook = ({ allBooks, dispatch, isLoading }) => {
 	const [bookTitle, setBookTitle] = useState("");
 	const [bookId, setBookId] = useState("");
 	const [quantity, setQuantity] = useState("");
@@ -63,9 +65,13 @@ const AddExistentBook = ({ allBooks, dispatch }) => {
 								if (newValue) {
 									setBookTitle(newValue.title);
 									setBookId(newValue._id);
+								} else {
+									setBookTitle("");
+									setBookId("");
 								}
 							}}
-							// loading={isLoading}
+							loading={isLoading}
+							loadingText="Loading..."
 							options={allBooks ? allBooks : []}
 							getOptionSelected={(option, value) => option.title === value}
 							getOptionLabel={(book) =>
@@ -120,6 +126,7 @@ const AddExistentBook = ({ allBooks, dispatch }) => {
 
 const mapStateToProps = createStructuredSelector({
 	allBooks: selectAllBooks,
+	isLoading: selectAreBooksFetching,
 });
 
 export default connect(mapStateToProps)(AddExistentBook);
